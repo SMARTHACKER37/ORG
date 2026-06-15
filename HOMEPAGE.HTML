@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Arise United Esports - Dominate Free Fire</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Root & Color Synchronization --- */
+        :root {
+            --bg-dark: #08080a; 
+            --bg-card: #111116;
+            --accent: #ff3c00; 
+            --accent-glow: rgba(255, 60, 0, 0.3);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --font-primary: 'Montserrat', sans-serif;
+            --font-heading: 'Oswald', sans-serif;
+        }
+
+        /* --- General Styles --- */
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-primary);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .text-accent { color: var(--accent); }
+        
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 5px var(--accent-glow); }
+            50% { box-shadow: 0 0 20px var(--accent-glow); }
+            100% { box-shadow: 0 0 5px var(--accent-glow); }
+        }
+
+        .animate-fade-in { animation: fadeInUp 1s ease-out; }
+
+        /* --- Navigation --- */
+        .navbar-custom {
+            background-color: rgba(8, 8, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #222;
+            padding: 15px 0;
+            transition: all 0.3s;
+        }
+        .navbar-brand {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main) !important;
+        }
+        .nav-link {
+            color: var(--text-main) !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent) !important;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(8,8,10,1)), 
+                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2070') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero-content h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 1s ease-out 0.3s;
+            opacity: 0; animation-fill-mode: forwards;
+        }
+        .btn-main {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            padding: 12px 35px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease-out 0.6s;
+            opacity: 0; animation-fill-mode: forwards;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-main:hover {
+            background-color: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);}}
+
+        /* --- Section General --- */
+        section { padding: 100px 0; }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 10px auto 0;
+        }
+
+        /* --- Eye-Catching Grid Sections (Provide & Require) --- */
+        .perks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .perk-card {
+            background: linear-gradient(145deg, #111116, #1a1a24);
+            border-radius: 15px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid transparent;
+            text-align: center;
+            height: 100%;
+        }
+        .perk-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease;
+        }
+        .perk-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(255, 60, 0, 0.2);
+        }
+        .perk-card:hover::before {
+            opacity: 1;
+        }
+        .perk-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            transition: transform 0.4s ease;
+        }
+        .perk-card:hover .perk-icon {
+            transform: scale(1.2) rotate(10deg);
+            text-shadow: 0 0 15px var(--accent);
+        }
+        .perk-card h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        .perk-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .perk-card.warning-style:hover {
+            border-color: #ffc107;
+            box-shadow: 0 15px 30px rgba(255, 193, 7, 0.2);
+        }
+        .perk-card.warning-style:hover::before {
+            background: radial-gradient(circle, rgba(255, 193, 7, 0.2) 0%, transparent 70%);
+            opacity: 1;
+        }
+        .perk-card.warning-style:hover .perk-icon {
+            color: #ffc107;
+            text-shadow: 0 0 15px #ffc107;
+        }
+
+        /* --- Clutch Clips Section --- */
+        .clip-card {
+            background-color: var(--bg-card);
+            border: 1px solid #222;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+        }
+        .clip-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-placeholder {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #222;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); font-size: 3rem;
+            transition: 0.3s;
+        }
+        .clip-card:hover .video-placeholder { color: var(--accent); transform: scale(1.05); }
+        .clip-info { padding: 20px; }
+        .clip-info h5 { margin-bottom: 5px; color: #fff; }
+        .clip-info p { margin-bottom: 0; color: var(--text-muted); font-size: 0.85rem; }
+
+        /* --- Roster Section --- */
+        .roster-card {
+            background-color: var(--bg-card);
+            border: 1px solid #222;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .roster-card:hover {
+            border-color: var(--accent);
+            animation: pulseGlow 2s infinite;
+        }
+        .player-img {
+            width: 100px; height: 100px;
+            background-color: #222;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 2px solid #333;
+            display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #555;
+            transition: 0.3s;
+        }
+        .roster-card:hover .player-img { border-color: var(--accent); color: var(--accent); }
+        .player-name { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 5px; }
+        .player-role { color: var(--accent); text-transform: uppercase; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; }
+
+        /* --- Recruitment CTA Section --- */
+        .cta-section {
+            background: linear-gradient(rgba(255, 60, 0, 0.1), rgba(8,8,10,1)), url('https://images.unsplash.com/photo-1580894908321-96bc4cae1394?q=80&w=2070') center/cover;
+            text-align: center;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #050507;
+            padding: 50px 0;
+            border-top: 1px solid #111;
+            text-align: center;
+        }
+        .footer-socials a {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .footer-socials a:hover { color: var(--accent); transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">ARISE <span class="text-accent">UNITED</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#offerings">Perks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#requirements">Requirements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#clips">Clips</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#roster">Roster</a></li>
+                    <li class="nav-item"><a class="nav-link" href="apply.html">Apply</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ARISE <span class="text-accent">TOGETHER</span><br>DOMINATE <span class="text-accent">ALWAYS</span></h1>
+            <p>Pune's Elite Free Fire Organization. Competing at T2/T3 Level. We are the new standard of competitive firepower in India.</p>
+            <a href="apply.html" class="btn btn-main">Join the Hunt</a>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <section id="about" class="bg-black">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 animate-fade-in">
+                    <h2 class="text-start mb-4">The <span class="text-accent">Mission</span></h2>
+                    <p class="text-muted fs-5">Arise United Esports isn't just a team; it's a discipline. We are dedicated to cultivating the rawest talent in India and refining it for the grandest stages of Free Fire. We provide the infrastructure; our players provide the execution.</p>
+                </div>
+                <div class="col-md-6 text-center animate-fade-in" style="animation-delay: 0.3s;">
+                    <div style="font-size: 10rem; color: #111;">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="offerings">
+        <div class="container">
+            <h2 class="section-title">What We <span class="text-accent">Provide</span></h2>
+            <div class="perks-grid">
+                <div class="perk-card">
+                    <div class="perk-icon"><i class="fas fa-fire"></i></div>
+                    <h4>Daily Lobbies</h4>
+                    <p>Consistent, high-tier action. We guarantee daily access to 25K / 35K / 45K / 55K / 75K / 100K competitive lobbies.</p>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon"><i class="fas fa-rupee-sign"></i></div>
+                    <h4>Financial Backing</h4>
+                    <p>Your skills pay off. We provide monthly recharges and performance-based salaries for top-tier execution.</p>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon"><i class="fas fa-tshirt"></i></div>
+                    <h4>Official Merch</h4>
+                    <p>Represent the org. Stay loyal and active for 3 months, and unlock your official custom team jersey.</p>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon"><i class="fas fa-trophy"></i></div>
+                    <h4>Tournament Entry</h4>
+                    <p>We handle the logistics. Get fully backed entry and registration support for official community and publisher tournaments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="requirements" class="bg-black">
+        <div class="container">
+            <h2 class="section-title">What Is <span class="text-accent">Required</span></h2>
+            <div class="perks-grid">
+                <div class="perk-card warning-style">
+                    <div class="perk-icon"><i class="fas fa-clock"></i></div>
+                    <h4>Daily Activity</h4>
+                    <p>Grind is mandatory. You must be available to play a minimum of 2-3 highly competitive lobbies every single day.</p>
+                </div>
+                <div class="perk-card warning-style">
+                    <div class="perk-icon"><i class="fas fa-check-double"></i></div>
+                    <h4>Verified History</h4>
+                    <p>We need proof of execution. You must have 15/30+ achievements secured under the exact same team name, verified via Instagram.</p>
+                </div>
+                <div class="perk-card warning-style">
+                    <div class="perk-icon"><i class="fas fa-crosshairs"></i></div>
+                    <h4>Raw Firepower</h4>
+                    <p>Only top-tier mechanical skill. You must submit actual gameplay team clips showcasing your combat dominance.</p>
+                </div>
+                <div class="perk-card warning-style">
+                    <div class="perk-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h4>The Pune Advantage</h4>
+                    <p>Local synergy matters. While not strictly mandatory, players located within Pune are given a priority advantage during screening.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="clips">
+        <div class="container">
+            <h2 class="section-title">Best <span class="text-accent">Clutch</span> Clips</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="clip-card">
+                        <div class="video-container">
+                            <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
+                        </div>
+                        <div class="clip-info">
+                            <h5>1v4 Squad Wipe - T2 Scrims</h5>
+                            <p>Date: 12/05/26</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="clip-card">
+                        <div class="video-container">
+                            <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
+                        </div>
+                        <div class="clip-info">
+                            <h5>Last Zone Survival Clutch</h5>
+                            <p>Date: 10/05/26</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="clip-card">
+                        <div class="video-container">
+                            <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
+                        </div>
+                        <div class="clip-info">
+                            <h5>Impossible Grenade Quad</h5>
+                            <p>Date: 08/05/26</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roster" class="bg-black">
+        <div class="container">
+            <h2 class="section-title">Active <span class="text-accent">Roster</span></h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-3">
+                    <div class="roster-card">
+                        <div class="player-img"><i class="fas fa-user-secret"></i></div>
+                        <div class="player-name">Player 1</div>
+                        <div class="player-role">IGL / Leader</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="roster-card">
+                        <div class="player-img"><i class="fas fa-crosshairs"></i></div>
+                        <div class="player-name">Player 2</div>
+                        <div class="player-role">Sniper</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="roster-card">
+                        <div class="player-img"><i class="fas fa-running"></i></div>
+                        <div class="player-name">Player 3</div>
+                        <div class="player-role">Rusher</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="roster-card">
+                        <div class="player-img"><i class="fas fa-medkit"></i></div>
+                        <div class="player-name">Player 4</div>
+                        <div class="player-role">Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="mb-4">Are You <span class="text-accent">Next?</span></h2>
+            <p class="text-muted mb-5 max-w-2xl mx-auto">We are actively searching for elite talent (IGL & Sniper) to finalize our roster. If you have the firepower and verified achievements, Arise United is your next step.</p>
+            <a href="apply.html" class="btn btn-main btn-lg">Submit Application</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-socials mb-4">
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-discord"></i></a>
+                <a href="https://wa.me/919512333455" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p class="text-muted mb-0">&copy; 2026 Arise United Esports. Based in Pune, India. All Rights Reserved.</p>
+            <p class="text-muted small">Dominate the Battleground.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
